@@ -1,79 +1,92 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Supervisión Escolar MINERD
 
-# Getting Started
+## Descripción
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+**Supervisión Escolar MINERD** es una aplicación móvil desarrollada para técnicos del Ministerio de Educación de la República Dominicana (MINERD) con el propósito de registrar y gestionar incidencias y vivencias durante visitas a las escuelas. La aplicación permite una gestión segura y organizada de los datos, facilitando el trabajo de supervisión escolar.
 
-## Step 1: Start the Metro Server
+## Funcionalidades
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+### Registro de Incidencias
 
-To start Metro, run the following command from the _root_ of your React Native project:
+- Permite a los usuarios ingresar y guardar registros con los siguientes datos:
+  - Título
+  - Centro Educativo
+  - Regional
+  - Distrito
+  - Fecha
+  - Descripción
+  - Foto
+  - Audio
 
-```bash
-# using npm
-npm start
+### Visualización de Incidencias
 
-# OR using Yarn
-yarn start
-```
+- Listado de todas las incidencias registradas.
+- Visualización detallada de cada incidencia, incluyendo la foto y la reproducción del audio.
 
-## Step 2: Start your Application
+### Función de Seguridad
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+- Opción para borrar todos los registros almacenados en el dispositivo en caso de emergencia.
 
-### For Android
+### Tipos de Visitas
 
-```bash
-# using npm
-npm run android
+- Consulta de todos los tipos de visitas existentes y sus detalles.
 
-# OR using Yarn
-yarn android
-```
+### Consulta de Escuela por Código
 
-### For iOS
+- Muestra los detalles de una escuela al ingresar su código.
 
-```bash
-# using npm
-npm run ios
+### Consulta de Director por Cédula
 
-# OR using Yarn
-yarn ios
-```
+- Muestra la foto, nombre, apellido, fecha de nacimiento, dirección y teléfono del director al ingresar su cédula.
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+### Registrar Visita
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+- Permite registrar una visita a una escuela ingresando los siguientes datos:
+  - Cédula del director
+  - Código del centro
+  - Motivo de la visita
+  - Foto evidencia
+  - Comentario
+  - Nota de voz
+  - Latitud
+  - Longitud
+  - Fecha
+  - Hora
 
-## Step 3: Modifying your App
+### Visitas Registradas
 
-Now that you have successfully run the app, let's modify it.
+- Consulta de las visitas registradas por el técnico.
+- Detalles de cada visita al hacer click en el listado.
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+### Mapa de Visitas
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+- Muestra un mapa con las visitas realizadas por el técnico.
+- Detalles de la visita al hacer click en el mapa.
 
-## Congratulations! :tada:
+### Noticias
 
-You've successfully run and modified your React Native App. :partying_face:
+- Noticias importantes para el técnico según el MINERD.
 
-### Now what?
+### Estado del Clima
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+- Muestra el clima en la ubicación del técnico utilizando una API.
 
-# Troubleshooting
+### Horóscopo
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+- Muestra el horóscopo del día para el técnico.
 
-# Learn More
+## Instalación
 
-To learn more about React Native, take a look at the following resources:
+### Requisitos
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- Node.js
+- React Native CLI
+- Android Studio (para emular dispositivos Android)
+
+### Pasos
+
+1. Clonar el repositorio:
+   ```bash
+   git clone https://github.com/tu-usuario/minerd-visitas-escolares.git
+   cd minerd-visitas-escolares
+   ```
