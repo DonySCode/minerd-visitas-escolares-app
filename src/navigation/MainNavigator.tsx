@@ -6,7 +6,7 @@ import aboutScreen from '../screens/general/AboutScreen.tsx';
 import newsScreen from '../screens/general/NewsScreen.tsx';
 import weatherScreen from '../screens/general/WeatherScreen.tsx';
 import VisitsNativeStackNavigator from './visits/VisitsNativeStackNavigator.tsx';
-import myVisitsMapScreen from "../screens/visits/MyVisitsMapScreen.tsx";
+import myVisitsMapScreen from '../screens/visits/MyVisitsMapScreen.tsx';
 import IncidencesNativeStackNavigator from './incidences/IncidencesNativeStackNavigator.tsx';
 import SchoolByCodeScreen from '../screens/general/SchoolByCodeScreen.tsx';
 import horoscopeScreen from '../screens/general/HoroscopeScreen.tsx';
@@ -43,7 +43,7 @@ const MainNavigator = (): JSX.Element => {
           name="SchoolByCode"
           component={SchoolByCodeScreen}
           options={{
-            title: 'Consulta de escula',
+            title: 'Consulta de escuela',
           }}
         />
         <Drawer.Screen

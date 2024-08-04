@@ -1,22 +1,22 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useState } from 'react';
-import { View, StyleSheet, ActivityIndicator, Alert } from 'react-native';
-import { VisitsNativeStackParamList } from '../../navigation/visits/VisitsNativeStackNavigator';
-import { useDispatch, useSelector } from 'react-redux';
-import { useFocusEffect } from '@react-navigation/native';
-import { RootState } from '../../store/store';
-import { Visit } from '../../features/visits/Visit';
-import { logout } from '../../features/auth/authSlice';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import React, {useState} from 'react';
+import {View, StyleSheet, ActivityIndicator, Alert} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {useFocusEffect} from '@react-navigation/native';
+import {RootState} from '../../store/store';
+import {Visit} from '../../features/visits/Visit';
+import {logout} from '../../features/auth/authSlice';
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+import {DrawerStackParamList} from '../../navigation/MainNavigator';
 
-type Props = NativeStackScreenProps<VisitsNativeStackParamList, 'MyVisits'>;
+type Props = NativeStackScreenProps<DrawerStackParamList, 'VisitsMap'>;
 
-const MyVisitsMapScreen = ({ navigation }: Props) => {
+const MyVisitsMapScreen = ({}: Props) => {
   const token = useSelector((state: RootState) => state.auth.token);
   const dispatch = useDispatch();
 
-  const [visits, setVisits] = useState<Visit[]>([]);
-  const [region, setRegion] = useState(null);
+  const [_, setVisits] = useState<Visit[]>([]);
+  const [region, setRegion] = useState<any>(null);
   const [markers, setMarkers] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -30,16 +30,18 @@ const MyVisitsMapScreen = ({ navigation }: Props) => {
           const data = await response.json();
           if (data.exito) {
             setVisits(data.datos);
-            const fetchedMarkers = data.datos.map((visit: Visit, index: number) => ({
-              coordinate: {
-                latitude: parseFloat(visit.latitud),
-                longitude: parseFloat(visit.longitud),
-              },
-              title: `Visita en centro: ${visit.codigo_centro}`,
-              description: `Motivo: ${visit.motivo}`,
-              key: index.toString(),
-              address: '',
-            }));
+            const fetchedMarkers = data.datos.map(
+              (visit: Visit, index: number) => ({
+                coordinate: {
+                  latitude: parseFloat(visit.latitud),
+                  longitude: parseFloat(visit.longitud),
+                },
+                title: `Visita en centro: ${visit.codigo_centro}`,
+                description: `Motivo: ${visit.motivo}`,
+                key: index.toString(),
+                address: '',
+              }),
+            );
             setMarkers(fetchedMarkers);
 
             if (fetchedMarkers.length > 0) {
@@ -67,7 +69,7 @@ const MyVisitsMapScreen = ({ navigation }: Props) => {
       };
 
       fetchVisits();
-    }, [token, dispatch])
+    }, [token, dispatch]),
   );
 
   if (loading) {
@@ -81,12 +83,8 @@ const MyVisitsMapScreen = ({ navigation }: Props) => {
   return (
     <View style={styles.container}>
       {region && (
-        <MapView
-          provider={PROVIDER_GOOGLE}
-          style={{ flex: 1 }}
-          region={region}
-        >
-          {markers.map((marker) => (
+        <MapView provider={PROVIDER_GOOGLE} style={{flex: 1}} region={region}>
+          {markers.map((marker: any) => (
             <Marker
               key={marker.key}
               coordinate={marker.coordinate}
