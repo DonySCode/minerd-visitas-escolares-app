@@ -27,8 +27,17 @@ const MainNavigator = (): JSX.Element => {
         <Drawer.Screen
           name="RegisterIncidence"
           component={incidencesRegister}
+          options={{
+            title: 'Registrar incidencias',
+          }}
         />
-        <Drawer.Screen name="ListIncidences" component={incidencesList} />
+        <Drawer.Screen
+          name="ListIncidences"
+          component={incidencesList}
+          options={{
+            title: 'Mis incidencias',
+          }}
+        />
         <Drawer.Screen
           name="IncidenceDetails"
           component={incidencesDetails}
