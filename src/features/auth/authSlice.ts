@@ -1,5 +1,4 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
-import {AccessToken} from './LoginReponse';
 
 export interface AuthState {
   isAuthenticated: boolean;
@@ -22,8 +21,8 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.token = null;
     },
-    setToken: (state, action: PayloadAction<AccessToken | undefined>) => {
-      state.token = action.payload?.token ?? '';
+    setToken: (state, action: PayloadAction<string>) => {
+      state.token = action.payload;
     },
     clearToken: state => {
       state.token = null;

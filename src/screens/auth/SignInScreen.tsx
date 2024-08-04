@@ -11,7 +11,7 @@ import {
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {AuthNativeStackParamList} from '../../navigation/AuthNavigator';
 import {useDispatch} from 'react-redux';
-import {login} from '../../features/auth/authSlice';
+import {login, setToken} from '../../features/auth/authSlice';
 import Spacer from '../../ui/spacer/Spacer';
 
 type Props = NativeStackScreenProps<AuthNativeStackParamList, 'SignIn'>;
@@ -33,6 +33,7 @@ const SignInScreen = ({navigation}: Props) => {
       const data = await response.json();
 
       if (data.exito) {
+        dispatch(setToken(data.datos.token));
         dispatch(login());
       } else {
         Alert.alert('Error', data.message || 'Invalid credentials');
