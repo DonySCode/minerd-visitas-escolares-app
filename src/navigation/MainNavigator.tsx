@@ -23,7 +23,13 @@ const MainNavigator = (): JSX.Element => {
         initialRouteName="Home"
         // eslint-disable-next-line react/no-unstable-nested-components
         drawerContent={props => <CustomDrawerContent {...props} />}>
-        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            title: 'Inicio',
+          }}
+        />
         <Drawer.Screen
           name="RegisterIncidence"
           component={incidencesRegister}
