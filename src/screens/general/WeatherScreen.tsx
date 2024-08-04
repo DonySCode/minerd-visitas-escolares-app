@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image } from "react-native";
+import React, {useState, useEffect} from 'react';
+import {View, Text, StyleSheet, Image} from 'react-native';
 import WeatherData from '../../features/general/WeatherData.ts';
-
 
 const WeatherScreen = () => {
   const [weather, setWeather] = useState<WeatherData | null>(null);
@@ -11,12 +10,12 @@ const WeatherScreen = () => {
     const city = 'Santo%20Domingo';
 
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`,
     )
       .then(res => res.json())
       .then(data => {
         const mappedData: WeatherData = {
-          location: { name: data.name },
+          location: {name: data.name},
           current: {
             temp_c: data.main.temp,
             condition: {
@@ -40,17 +39,22 @@ const WeatherScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.location}>Weather in {weather.location.name}</Text>
-      <Text style={styles.temp}>{weather.current.temp_c} °C</Text>
-      <Image
-        style={{
-          width: 100,
-          height: 100,
-        }}
-        source={{
-          uri: `https://openweathermap.org/img/wn/${weather.current.condition.icon}@2x.png`,
-        }}
-      />
+      <View style={styles.weatherContainer}>
+        <Text style={styles.location}>Weather in {weather.location.name}</Text>
+        <Text style={styles.temp}>{weather.current.temp_c} °C</Text>
+        {weather.current.condition.icon && (
+          <Image
+            // eslint-disable-next-line react-native/no-inline-styles
+            style={{
+              width: 100,
+              height: 100,
+            }}
+            source={{
+              uri: `https://openweathermap.org/img/wn/${weather.current.condition.icon}@2x.png`,
+            }}
+          />
+        )}
+      </View>
     </View>
   );
 };
@@ -60,17 +64,25 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#808080',
+  },
+  weatherContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'dodgerblue',
+    padding: 20,
+    borderRadius: 18,
   },
   location: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+    color: 'white',
   },
   temp: {
     fontSize: 48,
     fontWeight: 'bold',
     marginBottom: 10,
+    color: 'white',
   },
   condition: {
     fontSize: 18,

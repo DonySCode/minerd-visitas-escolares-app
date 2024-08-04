@@ -9,17 +9,19 @@ import {
   Alert,
 } from 'react-native';
 import {VisitsNativeStackParamList} from '../../navigation/visits/VisitsNaviteStackNavigator';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useFocusEffect} from '@react-navigation/native';
 import {RootState} from '../../store/store';
 import Spacer from '../../ui/spacer/Spacer';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Visit} from '../../features/visits/Visit';
+import {logout} from '../../features/auth/authSlice';
 
 type Props = NativeStackScreenProps<VisitsNativeStackParamList, 'MyVisits'>;
 
 const MyVisitsScreen = ({navigation}: Props) => {
   const token = useSelector((state: RootState) => state.auth.token);
+  const dispatch = useDispatch();
 
   const [visits, setVisits] = useState<Visit[]>([]);
   const [loading, setLoading] = useState(true);
@@ -35,7 +37,12 @@ const MyVisitsScreen = ({navigation}: Props) => {
           if (data.exito) {
             setVisits(data.datos);
           } else {
-            Alert.alert('Error', data.mensaje || 'Failed to fetch visits');
+            Alert.alert('Error', data.mensaje || 'Failed to fetch visits', [
+              {
+                text: 'Ok',
+                onPress: () => dispatch(logout()),
+              },
+            ]);
           }
         } catch (error) {
           console.error('Error fetching visits:', error);
