@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import SQLite from 'react-native-sqlite-storage';
 
 const db = SQLite.openDatabase(
@@ -40,7 +40,7 @@ const IncidentListScreen = ({ navigation }: { navigation: any }) => {
   return (
     <View style={styles.container}>
       <View style={styles.incidencesContainer}>
-        {incidences.map(item => <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Detalle de la Incidencia', { incidence: item })}>
+        {incidences.map(item => <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('IncidenceDetails', { incidence: item })}>
           <Text style={styles.buttonText}>{item.title}</Text>
         </TouchableOpacity>)}
 
