@@ -40,7 +40,7 @@ const IncidentListScreen = ({ navigation }: { navigation: any }) => {
   return (
     <View style={styles.container}>
       <View style={styles.incidencesContainer}>
-        {incidences.map(item => <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Detalle de la Incidencia', { incidence: item })}>
+        {incidences.map(item => <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('IncidenceDetails', { incidence: item })}>
           <Text style={styles.buttonText}>{item.title}</Text>
         </TouchableOpacity>)}
 

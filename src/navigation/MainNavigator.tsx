@@ -8,6 +8,9 @@ import CustomDrawerContent from '../features/general/CustomDrawerContent.tsx';
 
 export type DrawerStackParamList = {
   Home: undefined;
+  RegisterIncidence: undefined;
+  ListIncidences: undefined;
+  IncidenceDetails: undefined;
 };
 
 const Drawer = createDrawerNavigator<DrawerStackParamList>();
@@ -15,11 +18,14 @@ const Drawer = createDrawerNavigator<DrawerStackParamList>();
 const MainNavigator = (): JSX.Element => {
   return (
     <>
-      <Drawer.Navigator initialRouteName="Home" drawerContent={props => <CustomDrawerContent {...props} />}>
+      <Drawer.Navigator
+        initialRouteName="Home"
+        // eslint-disable-next-line react/no-unstable-nested-components
+        drawerContent={props => <CustomDrawerContent {...props} />}>
         <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Registro de Incidencias" component={incidencesRegister} />
-        <Drawer.Screen name="Lista de Incidencias" component={incidencesList} />
-        <Drawer.Screen name="Detalle de la Incidencia" component={incidencesDetails} options={{ drawerItemStyle: { display: 'none' } }}/>
+        <Drawer.Screen name="RegisterIncidence" component={incidencesRegister} />
+        <Drawer.Screen name="ListIncidences" component={incidencesList} />
+        <Drawer.Screen name="IncidenceDetails" component={incidencesDetails} options={{ drawerItemStyle: { display: 'none' }, title: 'Detalle de Incidencia'}}/>
       </Drawer.Navigator>
     </>
   );
