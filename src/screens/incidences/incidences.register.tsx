@@ -20,7 +20,7 @@ const db = SQLite.openDatabase(
 const audioRecorderPlayer = new AudioRecorderPlayer();
 
 
-function RegisterIncidentScreen({ navigation }) {
+function RegisterIncidentScreen({ navigation }: { navigation: any }) {
   const [title, setTitle] = useState<string>('');
   const [school, setSchool] = useState<string>('');
   const [regional, setRegional] = useState<string>('');

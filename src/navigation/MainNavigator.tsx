@@ -22,9 +22,9 @@ const MainNavigator = (): JSX.Element => {
         initialRouteName="Home"
         // eslint-disable-next-line react/no-unstable-nested-components
         drawerContent={props => <CustomDrawerContent {...props} />}>
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="RegisterIncidence" component={incidencesRegister} />
-        <Drawer.Screen name="ListIncidences" component={incidencesList} />
+        <Drawer.Screen name="Home" component={HomeScreen} options={{ title: 'Inicio'}} />
+        <Drawer.Screen name="RegisterIncidence" component={incidencesRegister} options={{ title: 'Registrar Incidencia'}}/>
+        <Drawer.Screen name="ListIncidences" component={incidencesList} options={{ title: 'Listar Inicidencias'}}/>
         <Drawer.Screen name="IncidenceDetails" component={incidencesDetails} options={{ drawerItemStyle: { display: 'none' }, title: 'Detalle de Incidencia'}}/>
       </Drawer.Navigator>
     </>
