@@ -40,7 +40,6 @@ const MainNavigator = (): JSX.Element => {
           component={SchoolByCodeScreen}
           options={{
             title: 'Consulta de escula',
-            headerShown: false,
           }}
         />
         <Drawer.Screen
