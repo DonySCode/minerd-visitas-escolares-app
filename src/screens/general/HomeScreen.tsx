@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {RootStackParamList} from '../../App';
 import {DrawerScreenProps} from '@react-navigation/drawer';
+import {DrawerStackParamList} from '../../navigation/MainNavigator';
 
-type Props = DrawerScreenProps<RootStackParamList, 'Home'>;
+type Props = DrawerScreenProps<DrawerStackParamList, 'Home'>;
 
 const HomeScreen = ({}: Props) => {
   return (
