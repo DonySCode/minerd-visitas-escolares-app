@@ -1,23 +1,32 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import WeatherData from '../../features/general/WeatherData.ts';
 
-interface WeatherData {
-  location: {name: string};
-  current: {temp_c: number; condition: {text: string; icon: string}};
-}
 
 const WeatherScreen = () => {
   const [weather, setWeather] = useState<WeatherData | null>(null);
 
   useEffect(() => {
     const apiKey = 'a364168d3842a8988f7282e798746e13';
-    const city = 'Santo Domingo';
+    const city = 'Santo%20Domingo';
 
     fetch(
-      `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`,
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
     )
       .then(res => res.json())
-      .then(data => setWeather(data))
+      .then(data => {
+        const mappedData: WeatherData = {
+          location: { name: data.name },
+          current: {
+            temp_c: data.main.temp,
+            condition: {
+              text: data.weather[0].description,
+              icon: data.weather[0].icon,
+            },
+          },
+        };
+        setWeather(mappedData);
+      })
       .catch(error => console.error('Error fetching weather:', error));
   }, []);
 
