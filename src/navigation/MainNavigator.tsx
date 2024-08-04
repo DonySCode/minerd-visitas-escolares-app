@@ -6,12 +6,14 @@ import incidencesList from '../screens/incidences/incidences.list.tsx';
 import incidencesDetails from '../screens/incidences/incidences.details.tsx';
 import CustomDrawerContent from '../features/general/CustomDrawerContent.tsx';
 import {Incidence} from '../features/incidences/Incidence.ts';
+import VisitsNativeStackNavigator from './visits/VisitsNaviteStackNavigator.tsx';
 
 export type DrawerStackParamList = {
   Home: undefined;
   RegisterIncidence: undefined;
   ListIncidences: undefined;
   IncidenceDetails: {incidence: Incidence};
+  Visits: undefined;
 };
 
 const Drawer = createDrawerNavigator<DrawerStackParamList>();
@@ -50,6 +52,14 @@ const MainNavigator = (): JSX.Element => {
           options={{
             drawerItemStyle: {display: 'none'},
             title: 'Detalle de Incidencia',
+          }}
+        />
+        <Drawer.Screen
+          name="Visits"
+          component={VisitsNativeStackNavigator}
+          options={{
+            title: 'Mis visitas',
+            headerShown: false,
           }}
         />
       </Drawer.Navigator>
