@@ -83,6 +83,7 @@ const MyVisitsMapScreen = ({}: Props) => {
   return (
     <View style={styles.container}>
       {region && (
+        // eslint-disable-next-line react-native/no-inline-styles
         <MapView provider={PROVIDER_GOOGLE} style={{flex: 1}} region={region}>
           {markers.map((marker: any) => (
             <Marker
