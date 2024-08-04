@@ -33,6 +33,9 @@ const HoroscopeScreen: React.FC = () => {
     try {
       const response = await fetch(
         `https://aztro.sameerkumar.website/?sign=${selectedSign}&day=today`,
+        {
+          method: 'POST',
+        }
       );
       const data: HoroscopeData = await response.json();
       setHoroscope(data.description);
