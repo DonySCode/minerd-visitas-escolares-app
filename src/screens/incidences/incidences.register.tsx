@@ -62,7 +62,7 @@ function RegisterIncidentScreen({navigation}: Props) {
         },
       );
     });
-    navigation.navigate('Home');
+    navigation.navigate('ListIncidences');
   };
 
   const takePhoto = () => {
@@ -179,9 +179,6 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     justifyContent: 'center',
-    borderColor: 'black',
-    borderStyle: 'solid',
-    borderWidth: 1,
     margin: 5,
     height: 79,
     width: 300,
@@ -189,13 +186,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 1.5,
     elevation: 8,
     shadowRadius: 20,
-    color: '#FFFFFF',
+    backgroundColor: '#008CBA',
   },
   buttonText: {
     fontFamily: 'Roboto',
     fontSize: 15,
     fontStyle: 'italic',
     fontWeight: '900',
+    color: '#FFFFFF',
   },
   Image: {
     height: 150,
@@ -208,6 +206,10 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 1,
     paddingLeft: 10,
+    fontFamily: 'Roboto',
+    fontSize: 15,
+    fontStyle: 'italic',
+    fontWeight: '900',
   },
 });
 

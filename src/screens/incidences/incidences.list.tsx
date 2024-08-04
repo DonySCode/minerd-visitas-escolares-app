@@ -50,22 +50,13 @@ const IncidentListScreen = ({navigation}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    marginVertical: 10,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  title: {
-    color: '#abc2c2',
-    fontSize: 30,
-    fontWeight: 'bold',
-    fontFamily: 'serif',
   },
   button: {
     alignItems: 'center',
     justifyContent: 'center',
-    borderColor: 'black',
-    borderStyle: 'solid',
-    borderWidth: 1,
     margin: 5,
     height: 40,
     width: 300,
@@ -73,21 +64,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 1.5,
     elevation: 8,
     shadowRadius: 20,
-    color: '#FFFFFF',
+    backgroundColor: '#008CBA',
   },
   buttonText: {
     fontFamily: 'Roboto',
     fontSize: 15,
-    fontStyle: 'italic',
+    textTransform: 'uppercase',
     fontWeight: '900',
-  },
-  Image: {
-    height: 150,
-    marginBottom: 10,
-  },
-  incidencesContainer: {
-    maxHeight: 1000,
-    height: 500,
+    color: '#FFFFFF',
   },
 });
 

@@ -5,6 +5,9 @@ import incidencesRegister from '../screens/incidences/incidences.register.tsx';
 import incidencesList from '../screens/incidences/incidences.list.tsx';
 import incidencesDetails from '../screens/incidences/incidences.details.tsx';
 import CustomDrawerContent from '../features/general/CustomDrawerContent.tsx';
+import aboutScreen from '../screens/general/AboutScreen.tsx';
+import newsScreen from '../screens/general/NewsScreen.tsx';
+import weatherScreen from '../screens/general/WeatherScreen.tsx';
 import {Incidence} from '../features/incidences/Incidence.ts';
 
 export type DrawerStackParamList = {
@@ -12,6 +15,9 @@ export type DrawerStackParamList = {
   RegisterIncidence: undefined;
   ListIncidences: undefined;
   IncidenceDetails: {incidence: Incidence};
+  About: undefined;
+  News: undefined;
+  Weather: undefined;
 };
 
 const Drawer = createDrawerNavigator<DrawerStackParamList>();
@@ -52,6 +58,9 @@ const MainNavigator = (): JSX.Element => {
             title: 'Detalle de Incidencia',
           }}
         />
+        <Drawer.Screen name="About" component={aboutScreen}/>
+        <Drawer.Screen name="News" component={newsScreen}/>
+        <Drawer.Screen name="Weather" component={weatherScreen}/>
       </Drawer.Navigator>
     </>
   );
