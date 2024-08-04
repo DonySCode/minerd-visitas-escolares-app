@@ -10,7 +10,6 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import Spacer from '../../ui/spacer/Spacer';
-import {green} from 'react-native-reanimated/lib/typescript/Colors';
 
 const SchoolByCodeScreen = () => {
   const [code, setCode] = useState('');
