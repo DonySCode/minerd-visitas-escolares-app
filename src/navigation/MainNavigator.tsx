@@ -11,7 +11,7 @@ export type DrawerStackParamList = {
   Home: undefined;
   RegisterIncidence: undefined;
   ListIncidences: undefined;
-  IncidenceDetails: Incidence;
+  IncidenceDetails: {incidence: Incidence};
 };
 
 const Drawer = createDrawerNavigator<DrawerStackParamList>();

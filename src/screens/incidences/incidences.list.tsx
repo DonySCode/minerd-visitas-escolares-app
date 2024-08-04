@@ -37,7 +37,9 @@ const IncidentListScreen = ({navigation}: Props) => {
         {incidences.map(item => (
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('IncidenceDetails', item)}>
+            onPress={() =>
+              navigation.navigate('IncidenceDetails', {incidence: item})
+            }>
             <Text style={styles.buttonText}>{item.title}</Text>
           </TouchableOpacity>
         ))}
