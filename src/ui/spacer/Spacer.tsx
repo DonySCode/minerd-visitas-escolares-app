@@ -9,6 +9,7 @@ export default function Spacer({
   marginLeft,
   marginTop,
   marginRight,
+  width,
   children,
 }: SpacerProps) {
   const containerStyle: StyleProp<ViewStyle> = {
@@ -18,6 +19,7 @@ export default function Spacer({
     marginLeft,
     marginTop,
     marginRight,
+    width,
   };
 
   return <View style={containerStyle}>{children}</View>;
