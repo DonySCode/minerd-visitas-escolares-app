@@ -53,7 +53,7 @@ const MyVisitsScreen = ({navigation}: Props) => {
       };
 
       fetchVisits();
-    }, [token]),
+    }, [token, dispatch]),
   );
 
   if (loading) {

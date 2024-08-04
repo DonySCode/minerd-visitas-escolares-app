@@ -86,7 +86,7 @@ const MainNavigator = (): JSX.Element => {
           name="About"
           component={aboutScreen}
           options={{
-            title: 'Sobre Mi',
+            title: 'Sobre mi',
           }}
         />
       </Drawer.Navigator>
