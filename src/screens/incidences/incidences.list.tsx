@@ -1,36 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import {DrawerScreenProps} from '@react-navigation/drawer';
+import React, {useEffect, useState} from 'react';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import SQLite from 'react-native-sqlite-storage';
+import {DrawerStackParamList} from '../../navigation/MainNavigator';
+import {Incidence} from '../../features/incidences/Incidence';
 
 const db = SQLite.openDatabase(
   {
     name: 'incidences.db',
     location: 'default',
   },
-  () => { },
+  () => {},
   error => {
     console.log(error);
   },
 );
 
-type Incidence = {
-  id: number;
-  title: string;
-  school: string;
-  regional: string;
-  district: string;
-  date: string;
-  description: string;
-  photo: string;
-  audio: string;
-};
+type Props = DrawerScreenProps<DrawerStackParamList, 'ListIncidences'>;
 
-const IncidentListScreen = ({ navigation }: { navigation: any }) => {
+const IncidentListScreen = ({navigation}: Props) => {
   const [incidences, setIncidences] = useState<Incidence[]>([]);
 
   useEffect(() => {
     db.transaction(tx => {
-      tx.executeSql('SELECT * FROM incidences', [], (tx, results) => {
+      tx.executeSql('SELECT * FROM incidences', [], (_, results) => {
         let rows = results.rows.raw();
         setIncidences(rows);
       });
@@ -40,10 +33,13 @@ const IncidentListScreen = ({ navigation }: { navigation: any }) => {
   return (
     <View style={styles.container}>
       <View style={styles.incidencesContainer}>
-        {incidences.map(item => <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('IncidenceDetails', { incidence: item })}>
-          <Text style={styles.buttonText}>{item.title}</Text>
-        </TouchableOpacity>)}
-
+        {incidences.map(item => (
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('IncidenceDetails', item)}>
+            <Text style={styles.buttonText}>{item.title}</Text>
+          </TouchableOpacity>
+        ))}
       </View>
     </View>
   );
@@ -80,15 +76,15 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontSize: 15,
     fontStyle: 'italic',
-    fontWeight: '900'
+    fontWeight: '900',
   },
   Image: {
     height: 150,
-    marginBottom: 10
+    marginBottom: 10,
   },
   incidencesContainer: {
     maxHeight: 1000,
-    height: 500
+    height: 500,
   },
 });
 

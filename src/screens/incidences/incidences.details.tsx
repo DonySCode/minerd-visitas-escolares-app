@@ -1,18 +1,25 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, Alert, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Alert,
+  TouchableOpacity,
+} from 'react-native';
 import Sound from 'react-native-sound';
 
-const IncidentDetailsScreen = ({ route }: { route: any }) => {
-  const { incidence } = route.params;
+const IncidentDetailsScreen = ({route}: {route: any}) => {
+  const {incidence} = route.params;
 
   const playAudio = (audioUri: string) => {
-    const sound = new Sound(audioUri, undefined, (error) => {
+    const sound = new Sound(audioUri, undefined, error => {
       if (error) {
         console.log('Error al cargar el audio', error);
         Alert.alert('Error', 'No se pudo cargar el audio.');
         return;
       }
-      sound.play((success) => {
+      sound.play(success => {
         if (success) {
           console.log('Reproducción completa');
         } else {
@@ -30,9 +37,13 @@ const IncidentDetailsScreen = ({ route }: { route: any }) => {
       <Text>Regional: {incidence.regional}</Text>
       <Text>Distrito: {incidence.district}</Text>
       <Text>Fecha: {incidence.date}</Text>
-      {incidence.photo && <Image source={{ uri: incidence.photo }} style={styles.image} />}
+      {incidence.photo && (
+        <Image source={{uri: incidence.photo}} style={styles.image} />
+      )}
       {incidence.audio && (
-        <TouchableOpacity style={styles.button} onPress={() => playAudio(incidence.audio)}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => playAudio(incidence.audio)}>
           <Text style={styles.buttonText}>Reproducir Audio</Text>
         </TouchableOpacity>
       )}
@@ -75,7 +86,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontSize: 15,
     fontStyle: 'italic',
-    fontWeight: '900'
+    fontWeight: '900',
   },
 });
 

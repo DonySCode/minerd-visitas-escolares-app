@@ -1,26 +1,35 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import RNFS from 'react-native-fs';
-import { View, Text, TextInput, Alert, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { launchCamera, Asset } from 'react-native-image-picker';
+import {
+  View,
+  Text,
+  TextInput,
+  Alert,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+import {launchCamera, Asset} from 'react-native-image-picker';
 import AudioRecorderPlayer from 'react-native-audio-recorder-player';
 import SQLite from 'react-native-sqlite-storage';
+import {DrawerScreenProps} from '@react-navigation/drawer';
+import {DrawerStackParamList} from '../../navigation/MainNavigator';
 
 const db = SQLite.openDatabase(
   {
     name: 'incidences.db',
     location: 'default',
   },
-  () => { },
+  () => {},
   error => {
     console.log(error);
   },
 );
 
-
 const audioRecorderPlayer = new AudioRecorderPlayer();
 
+type Props = DrawerScreenProps<DrawerStackParamList, 'RegisterIncidence'>;
 
-function RegisterIncidentScreen({ navigation }) {
+function RegisterIncidentScreen({navigation}: Props) {
   const [title, setTitle] = useState<string>('');
   const [school, setSchool] = useState<string>('');
   const [regional, setRegional] = useState<string>('');
@@ -34,17 +43,30 @@ function RegisterIncidentScreen({ navigation }) {
   const handleSave = () => {
     db.transaction(tx => {
       tx.executeSql(
-        `INSERT INTO incidences (title, school, regional, district, date, description, photo, audio) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-        [title, school, regional, district, date, description, photo?.uri, audioUri],
-        () => { console.log('Record added successfully') },
-        error => { console.log('Error: ', error) }
+        'INSERT INTO incidences (title, school, regional, district, date, description, photo, audio) VALUES (?, ?, ?, ?, ?, ?, ?, ?',
+        [
+          title,
+          school,
+          regional,
+          district,
+          date,
+          description,
+          photo?.uri,
+          audioUri,
+        ],
+        () => {
+          console.log('Record added successfully');
+        },
+        error => {
+          console.log('Error: ', error);
+        },
       );
     });
-    navigation.navigate('Home')
+    navigation.navigate('Home');
   };
 
   const takePhoto = () => {
-    launchCamera({ mediaType: 'photo' }, (response) => {
+    launchCamera({mediaType: 'photo'}, response => {
       if (response.assets) {
         setPhoto(response.assets[0]);
       }
@@ -88,17 +110,51 @@ function RegisterIncidentScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View>
-        <TextInput style={styles.textField} placeholder="Escriba el título" value={title} onChangeText={setTitle} />
-        <TextInput style={styles.textField} placeholder="Escriba el centro educativo" value={school} onChangeText={setSchool} />
-        <TextInput style={styles.textField} placeholder="Escriba el numero de regional" value={regional} onChangeText={setRegional} />
-        <TextInput style={styles.textField} placeholder="Escriba el numero de distrito" value={district} onChangeText={setDistrict} />
-        <TextInput style={styles.textField} placeholder="Escriba la fecha" value={date} onChangeText={setDate} />
-        <TextInput style={styles.textField} placeholder="Escriba la descripción" value={description} onChangeText={setDescription} />
+        <TextInput
+          style={styles.textField}
+          placeholder="Escriba el título"
+          value={title}
+          onChangeText={setTitle}
+        />
+        <TextInput
+          style={styles.textField}
+          placeholder="Escriba el centro educativo"
+          value={school}
+          onChangeText={setSchool}
+        />
+        <TextInput
+          style={styles.textField}
+          placeholder="Escriba el numero de regional"
+          value={regional}
+          onChangeText={setRegional}
+        />
+        <TextInput
+          style={styles.textField}
+          placeholder="Escriba el numero de distrito"
+          value={district}
+          onChangeText={setDistrict}
+        />
+        <TextInput
+          style={styles.textField}
+          placeholder="Escriba la fecha"
+          value={date}
+          onChangeText={setDate}
+        />
+        <TextInput
+          style={styles.textField}
+          placeholder="Escriba la descripción"
+          value={description}
+          onChangeText={setDescription}
+        />
         <TouchableOpacity style={styles.button} onPress={takePhoto}>
           <Text style={styles.buttonText}>Tomar Foto</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={isRecording ? stopRecording : startRecording}>
-          <Text style={styles.buttonText}>{isRecording ? "Detener Grabación" : "Grabar Audio"}</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={isRecording ? stopRecording : startRecording}>
+          <Text style={styles.buttonText}>
+            {isRecording ? 'Detener Grabación' : 'Grabar Audio'}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={handleSave}>
           <Text style={styles.buttonText}>Guardar</Text>
@@ -106,7 +162,7 @@ function RegisterIncidentScreen({ navigation }) {
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -139,11 +195,11 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontSize: 15,
     fontStyle: 'italic',
-    fontWeight: '900'
+    fontWeight: '900',
   },
   Image: {
     height: 150,
-    marginBottom: 10
+    marginBottom: 10,
   },
   textField: {
     margin: 5,
@@ -151,8 +207,8 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderStyle: 'solid',
     borderWidth: 1,
-    paddingLeft: 10
-  }
+    paddingLeft: 10,
+  },
 });
 
 export default RegisterIncidentScreen;
