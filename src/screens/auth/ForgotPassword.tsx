@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, TextInput, View, Button, Alert} from 'react-native';
+import {StyleSheet, Text, View, Alert} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {AuthNativeStackParamList} from '../../navigation/AuthNavigator';
+import MinerdAppButton from '../../ui/MinerdAppButton';
+import MinerdAppInput from '../../ui/MinerdAppInput';
 
 type Props = NativeStackScreenProps<AuthNativeStackParamList, 'ForgotPassword'>;
 
@@ -36,22 +38,21 @@ const ForgotPasswordScreen = ({navigation}: Props) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Reset Password</Text>
-      <TextInput
-        style={styles.input}
+      <Text style={styles.title}>Reiniciar contraseña</Text>
+
+      <MinerdAppInput
+        color="blue"
         placeholder="Cédula"
         value={cedula}
-        onChangeText={setCedula}
-        keyboardType="numeric"
+        setValue={setCedula}
       />
-      <TextInput
-        style={styles.input}
+      <MinerdAppInput
+        color="blue"
         placeholder="Correo"
         value={correo}
-        onChangeText={setCorreo}
-        keyboardType="email-address"
+        setValue={setCorreo}
       />
-      <Button title="Reset Password" onPress={handleResetPassword} />
+      <MinerdAppButton title="Reiniciar" onPress={handleResetPassword} />
     </View>
   );
 };
@@ -64,6 +65,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
+    backgroundColor: 'white',
   },
   title: {
     fontSize: 24,
