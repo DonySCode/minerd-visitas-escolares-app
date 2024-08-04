@@ -7,9 +7,11 @@ import newsScreen from '../screens/general/NewsScreen.tsx';
 import weatherScreen from '../screens/general/WeatherScreen.tsx';
 import VisitsNativeStackNavigator from './visits/VisitsNativeStackNavigator.tsx';
 import IncidencesNativeStackNavigator from './incidences/IncidencesNativeStackNavigator.tsx';
+import SchoolByCodeScreen from '../screens/general/SchoolByCodeScreen.tsx';
 
 export type DrawerStackParamList = {
   Home: undefined;
+  SchoolByCode: undefined;
   ListIncidences: undefined;
   Visits: undefined;
   About: undefined;
@@ -31,6 +33,14 @@ const MainNavigator = (): JSX.Element => {
           component={HomeScreen}
           options={{
             title: 'Inicio',
+          }}
+        />
+        <Drawer.Screen
+          name="SchoolByCode"
+          component={SchoolByCodeScreen}
+          options={{
+            title: 'Consulta de escula',
+            headerShown: false,
           }}
         />
         <Drawer.Screen
