@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, TextInput, View, Button, Alert} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {VisitsNativeStackParamList} from '../../navigation/visits/VisitsNaviteStackNavigator';
+import {VisitsNativeStackParamList} from '../../navigation/visits/VisitsNativeStackNavigator';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
 

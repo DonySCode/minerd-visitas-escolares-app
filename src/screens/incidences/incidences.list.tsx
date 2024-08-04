@@ -1,10 +1,10 @@
-import {DrawerScreenProps} from '@react-navigation/drawer';
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import SQLite from 'react-native-sqlite-storage';
-import {DrawerStackParamList} from '../../navigation/MainNavigator';
 import {Incidence} from '../../features/incidences/Incidence';
 import {useFocusEffect} from '@react-navigation/native';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {IncidencesNativeStackParamList} from '../../navigation/incidences/IncidencesNativeStackNavigator';
 
 const db = SQLite.openDatabase(
   {
@@ -17,7 +17,10 @@ const db = SQLite.openDatabase(
   },
 );
 
-type Props = DrawerScreenProps<DrawerStackParamList, 'ListIncidences'>;
+type Props = NativeStackScreenProps<
+  IncidencesNativeStackParamList,
+  'MyIncidences'
+>;
 
 const IncidentListScreen = ({navigation}: Props) => {
   const [incidences, setIncidences] = useState<Incidence[]>([]);
@@ -33,7 +36,7 @@ const IncidentListScreen = ({navigation}: Props) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.incidencesContainer}>
+      <View>
         {incidences.map(item => (
           <TouchableOpacity
             style={styles.button}

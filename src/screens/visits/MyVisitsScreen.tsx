@@ -8,7 +8,7 @@ import {
   ActivityIndicator,
   Alert,
 } from 'react-native';
-import {VisitsNativeStackParamList} from '../../navigation/visits/VisitsNaviteStackNavigator';
+import {VisitsNativeStackParamList} from '../../navigation/visits/VisitsNativeStackNavigator';
 import {useDispatch, useSelector} from 'react-redux';
 import {useFocusEffect} from '@react-navigation/native';
 import {RootState} from '../../store/store';

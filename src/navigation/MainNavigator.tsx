@@ -1,21 +1,16 @@
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import React from 'react';
 import HomeScreen from '../screens/general/HomeScreen';
-import incidencesRegister from '../screens/incidences/incidences.register.tsx';
-import incidencesList from '../screens/incidences/incidences.list.tsx';
-import incidencesDetails from '../screens/incidences/incidences.details.tsx';
 import CustomDrawerContent from '../features/general/CustomDrawerContent.tsx';
 import aboutScreen from '../screens/general/AboutScreen.tsx';
 import newsScreen from '../screens/general/NewsScreen.tsx';
 import weatherScreen from '../screens/general/WeatherScreen.tsx';
-import {Incidence} from '../features/incidences/Incidence.ts';
-import VisitsNativeStackNavigator from './visits/VisitsNaviteStackNavigator.tsx';
+import VisitsNativeStackNavigator from './visits/VisitsNativeStackNavigator.tsx';
+import IncidencesNativeStackNavigator from './incidences/IncidencesNativeStackNavigator.tsx';
 
 export type DrawerStackParamList = {
   Home: undefined;
-  RegisterIncidence: undefined;
   ListIncidences: undefined;
-  IncidenceDetails: {incidence: Incidence};
   Visits: undefined;
   About: undefined;
   News: undefined;
@@ -39,25 +34,11 @@ const MainNavigator = (): JSX.Element => {
           }}
         />
         <Drawer.Screen
-          name="RegisterIncidence"
-          component={incidencesRegister}
-          options={{
-            title: 'Registrar incidencias',
-          }}
-        />
-        <Drawer.Screen
           name="ListIncidences"
-          component={incidencesList}
+          component={IncidencesNativeStackNavigator}
           options={{
             title: 'Mis incidencias',
-          }}
-        />
-        <Drawer.Screen
-          name="IncidenceDetails"
-          component={incidencesDetails}
-          options={{
-            drawerItemStyle: {display: 'none'},
-            title: 'Detalle de Incidencia',
+            headerShown: false,
           }}
         />
         <Drawer.Screen

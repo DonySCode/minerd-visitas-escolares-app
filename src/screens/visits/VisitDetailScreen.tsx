@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {VisitsNativeStackParamList} from '../../navigation/visits/VisitsNaviteStackNavigator';
+import {VisitsNativeStackParamList} from '../../navigation/visits/VisitsNativeStackNavigator';
 
 type Props = NativeStackScreenProps<VisitsNativeStackParamList, 'VisitDetails'>;
 
