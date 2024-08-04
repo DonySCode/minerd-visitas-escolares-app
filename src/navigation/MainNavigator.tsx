@@ -60,15 +60,33 @@ const MainNavigator = (): JSX.Element => {
             title: 'Detalle de Incidencia',
           }}
         />
-        <Drawer.Screen name="About" component={aboutScreen} />
-        <Drawer.Screen name="News" component={newsScreen} />
-        <Drawer.Screen name="Weather" component={weatherScreen} />
         <Drawer.Screen
           name="Visits"
           component={VisitsNativeStackNavigator}
           options={{
             title: 'Mis visitas',
             headerShown: false,
+          }}
+        />
+        <Drawer.Screen
+          name="News"
+          component={newsScreen}
+          options={{
+            title: 'Noticias',
+          }}
+        />
+        <Drawer.Screen
+          name="Weather"
+          component={weatherScreen}
+          options={{
+            title: 'Clima',
+          }}
+        />
+        <Drawer.Screen
+          name="About"
+          component={aboutScreen}
+          options={{
+            title: 'Sobre Mi',
           }}
         />
       </Drawer.Navigator>
