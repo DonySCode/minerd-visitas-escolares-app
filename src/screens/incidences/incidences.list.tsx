@@ -1,9 +1,10 @@
 import {DrawerScreenProps} from '@react-navigation/drawer';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import SQLite from 'react-native-sqlite-storage';
 import {DrawerStackParamList} from '../../navigation/MainNavigator';
 import {Incidence} from '../../features/incidences/Incidence';
+import {useFocusEffect} from '@react-navigation/native';
 
 const db = SQLite.openDatabase(
   {
@@ -21,14 +22,14 @@ type Props = DrawerScreenProps<DrawerStackParamList, 'ListIncidences'>;
 const IncidentListScreen = ({navigation}: Props) => {
   const [incidences, setIncidences] = useState<Incidence[]>([]);
 
-  useEffect(() => {
+  useFocusEffect(() => {
     db.transaction(tx => {
       tx.executeSql('SELECT * FROM incidences', [], (_, results) => {
         let rows = results.rows.raw();
         setIncidences(rows);
       });
     });
-  }, []);
+  });
 
   return (
     <View style={styles.container}>

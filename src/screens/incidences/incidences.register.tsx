@@ -43,7 +43,7 @@ function RegisterIncidentScreen({navigation}: Props) {
   const handleSave = () => {
     db.transaction(tx => {
       tx.executeSql(
-        'INSERT INTO incidences (title, school, regional, district, date, description, photo, audio) VALUES (?, ?, ?, ?, ?, ?, ?, ?',
+        'INSERT INTO incidences (title, school, regional, district, date, description, photo, audio) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
         [
           title,
           school,
