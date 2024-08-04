@@ -7,8 +7,10 @@ import {
   StyleSheet,
   Alert,
   FlatList,
+  ActivityIndicator,
 } from 'react-native';
 import Spacer from '../../ui/spacer/Spacer';
+import {green} from 'react-native-reanimated/lib/typescript/Colors';
 
 const SchoolByCodeScreen = () => {
   const [code, setCode] = useState('');
@@ -89,8 +91,10 @@ const SchoolByCodeScreen = () => {
       <Spacer marginVertical={10} marginBottom={30}>
         <Button title="Consultar" onPress={fetchSchoolData} />
       </Spacer>
-      {loading && <Text style={styles.loading}>Cargando...</Text>}
-      {schools.length > 0 && (
+      <Spacer marginBottom={10}>
+        {loading && <ActivityIndicator size={40} color={'dodgerblue'} />}
+      </Spacer>
+      {schools.length > 0 && !loading && (
         <TextInput
           style={styles.searchInput}
           placeholder="Buscar por nombre"
@@ -98,13 +102,15 @@ const SchoolByCodeScreen = () => {
           onChangeText={setSearch}
         />
       )}
-      <FlatList
-        data={filteredSchools}
-        keyExtractor={(item: any) => item.idx}
-        renderItem={renderSchoolItem}
-        style={styles.list}
-        contentContainerStyle={styles.listContainer}
-      />
+      {!loading && (
+        <FlatList
+          data={filteredSchools}
+          keyExtractor={(item: any) => item.idx}
+          renderItem={renderSchoolItem}
+          style={styles.list}
+          contentContainerStyle={styles.listContainer}
+        />
+      )}
     </View>
   );
 };
@@ -113,7 +119,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    justifyContent: 'center',
     alignItems: 'center',
   },
   title: {
