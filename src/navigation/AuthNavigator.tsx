@@ -29,19 +29,15 @@ const AuthNavigator = () => {
       <Stack.Screen
         name="SignUp"
         component={SignUpScreen}
-        options={{headerShown: false}}
+        options={{
+          title: '',
+        }}
       />
       <Stack.Screen
         name="ForgotPassword"
         component={ForgotPasswordScreen}
         options={{
-          title: 'Forgot password?',
-          navigationBarColor: 'white',
-          headerTitleAlign: 'center',
-          headerStyle: {
-            backgroundColor: '#ffb000',
-          },
-          headerTintColor: 'white',
+          title: '',
         }}
       />
     </Stack.Navigator>
