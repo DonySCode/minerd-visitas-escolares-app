@@ -32,7 +32,7 @@ const CustomDrawerContent = (
 const styles = StyleSheet.create({
   logoutButtonContainer: {
     marginTop: 16,
-    marginHorizontal: 16,
+    marginHorizontal: 10,
   },
   logoutButton: {
     backgroundColor: '#e63946',
