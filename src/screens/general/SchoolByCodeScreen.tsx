@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
-  TextInput,
   StyleSheet,
   Alert,
   FlatList,
@@ -124,6 +123,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   title: {
     fontSize: 24,
@@ -163,9 +163,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 16,
     borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#ddd',
     marginBottom: 10,
+    borderWidth: 1,
+    borderColor: 'gray',
+    elevation: 2,
   },
   label: {
     fontWeight: 'bold',
