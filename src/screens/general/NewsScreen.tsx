@@ -1,5 +1,13 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList, StyleSheet, Image} from 'react-native';
+import {useFocusEffect} from '@react-navigation/native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  Image,
+  ActivityIndicator,
+} from 'react-native';
 
 interface NewsItem {
   title: string;
@@ -11,17 +19,24 @@ interface NewsItem {
 
 const NewsScreen = () => {
   const [news, setNews] = useState<NewsItem[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  useFocusEffect(() => {
     fetch('https://adamix.net/minerd/def/noticias.php')
       .then(res => res.json())
-      .then(data => setNews(data))
-      .catch(error => console.error('Error fetching news:', error));
-  }, []);
+      .then(data => {
+        setNews(data);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error fetching news:', error);
+        setLoading(false);
+      });
+  });
 
   const renderNewsItem = ({item}: {item: NewsItem}) => (
     <View style={styles.newsItem}>
-      <Image source={{uri: item.image}} style={styles.image} />
+      {item.image && <Image source={{uri: item.image}} style={styles.image} />}
       <Text style={styles.title}>{item.title}</Text>
       <Text style={styles.description}>{item.description}</Text>
     </View>
@@ -29,11 +44,15 @@ const NewsScreen = () => {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={news}
-        renderItem={renderNewsItem}
-        keyExtractor={item => item.link}
-      />
+      {loading ? (
+        <ActivityIndicator size="large" color="#0000ff" />
+      ) : (
+        <FlatList
+          data={news}
+          renderItem={renderNewsItem}
+          keyExtractor={item => item.link}
+        />
+      )}
     </View>
   );
 };
@@ -68,9 +87,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 5,
+    color: 'black',
   },
   description: {
     fontSize: 14,
+    color: '#6e6e6e',
   },
 });
 
