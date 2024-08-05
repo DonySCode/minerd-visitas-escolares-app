@@ -67,7 +67,6 @@ const MainNavigator = (): JSX.Element => {
           component={myVisitsMapScreen}
           options={{
             title: 'Mapa de Visitas',
-            headerShown: false,
           }}
         />
         <Drawer.Screen
