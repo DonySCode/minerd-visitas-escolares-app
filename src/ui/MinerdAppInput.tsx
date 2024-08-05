@@ -40,9 +40,9 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 8,
     marginVertical: 8,
-    borderWidth: 1,
-    borderColor: '#ccc',
     borderRadius: 4,
     color: 'black',
+    backgroundColor: 'white',
+    elevation: 2,
   },
 });

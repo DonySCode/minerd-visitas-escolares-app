@@ -22,15 +22,16 @@ const MinerdAppDatePicker = ({date, setDate}: Props) => {
 export default MinerdAppDatePicker;
 
 const styles = StyleSheet.create({
-  header: {
-    color: 'black',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
   datePickerContainer: {
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
     paddingVertical: 20,
+    width: '100%',
+  },
+  header: {
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
 });

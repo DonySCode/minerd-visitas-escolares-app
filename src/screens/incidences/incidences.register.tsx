@@ -1,18 +1,14 @@
 import React, {useState} from 'react';
-import RNFS from 'react-native-fs';
-import {
-  View,
-  Text,
-  TextInput,
-  Alert,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
-import {launchCamera, Asset} from 'react-native-image-picker';
-import AudioRecorderPlayer from 'react-native-audio-recorder-player';
+import {View, StyleSheet} from 'react-native';
 import SQLite from 'react-native-sqlite-storage';
 import {DrawerScreenProps} from '@react-navigation/drawer';
-import {DrawerStackParamList} from '../../navigation/MainNavigator';
+import {IncidencesNativeStackParamList} from '../../navigation/incidences/IncidencesNativeStackNavigator';
+import MinerdAppInput from '../../ui/MinerdAppInput';
+import MinerdAppPhotoInput from '../../ui/MinerdAppPhotoInput';
+import MinerdAppAudioRecorder from '../../ui/MinerdAppAudioRecorder';
+import MinerdAppButton from '../../ui/MinerdAppButton';
+import MinerdAppDatePicker from '../../ui/MinerdAppDatePicker';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const db = SQLite.openDatabase(
   {
@@ -25,35 +21,26 @@ const db = SQLite.openDatabase(
   },
 );
 
-const audioRecorderPlayer = new AudioRecorderPlayer();
-
-type Props = DrawerScreenProps<DrawerStackParamList, 'RegisterIncidence'>;
+type Props = DrawerScreenProps<
+  IncidencesNativeStackParamList,
+  'RegisterIncidence'
+>;
 
 function RegisterIncidentScreen({navigation}: Props) {
   const [title, setTitle] = useState<string>('');
   const [school, setSchool] = useState<string>('');
   const [regional, setRegional] = useState<string>('');
   const [district, setDistrict] = useState<string>('');
-  const [date, setDate] = useState<string>('');
+  const [date, setDate] = useState(new Date());
   const [description, setDescription] = useState<string>('');
-  const [photo, setPhoto] = useState<Asset | null>(null);
-  const [audioUri, setAudioUri] = useState<string | null>(null);
-  const [isRecording, setIsRecording] = useState<boolean>(false);
+  const [photo, setPhoto] = useState('');
+  const [audio, setAudio] = useState('');
 
   const handleSave = () => {
     db.transaction(tx => {
       tx.executeSql(
         'INSERT INTO incidences (title, school, regional, district, date, description, photo, audio) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-        [
-          title,
-          school,
-          regional,
-          district,
-          date,
-          description,
-          photo?.uri,
-          audioUri,
-        ],
+        [title, school, regional, district, date, description, photo, audio],
         () => {
           console.log('Record added successfully');
         },
@@ -62,104 +49,47 @@ function RegisterIncidentScreen({navigation}: Props) {
         },
       );
     });
-    navigation.navigate('ListIncidences');
-  };
-
-  const takePhoto = () => {
-    launchCamera({mediaType: 'photo'}, response => {
-      if (response.assets) {
-        setPhoto(response.assets[0]);
-      }
-    });
-  };
-
-  const startRecording = async () => {
-    try {
-      const path = `${RNFS.DocumentDirectoryPath}/${title}.mp4`;
-      const uri = await audioRecorderPlayer.startRecorder(path);
-      setAudioUri(uri);
-      setIsRecording(true);
-
-      audioRecorderPlayer.addRecordBackListener((e: any) => {
-        console.log('Recording: ', e);
-        return;
-      });
-      console.log('Grabación iniciada');
-    } catch (error) {
-      console.error('Error al iniciar la grabación', error);
-      Alert.alert('Error', 'No se pudo iniciar la grabación.');
-    }
-  };
-
-  const stopRecording = async () => {
-    if (isRecording) {
-      try {
-        await audioRecorderPlayer.stopRecorder();
-        audioRecorderPlayer.removeRecordBackListener();
-        setIsRecording(false);
-        console.log('Grabación detenida');
-      } catch (error) {
-        console.error('Error al detener la grabación', error);
-        Alert.alert('Error', 'No se pudo detener la grabación.');
-      }
-    } else {
-      console.log('No hay grabación en curso para detener.');
-    }
+    navigation.navigate('MyIncidences');
   };
 
   return (
     <View style={styles.container}>
-      <View>
-        <TextInput
-          style={styles.textField}
-          placeholder="Escriba el título"
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <MinerdAppInput
+          color="blue"
+          placeholder="Título"
           value={title}
-          onChangeText={setTitle}
+          setValue={setTitle}
         />
-        <TextInput
-          style={styles.textField}
-          placeholder="Escriba el centro educativo"
+        <MinerdAppInput
+          color="blue"
+          placeholder="Centro Educativo"
           value={school}
-          onChangeText={setSchool}
+          setValue={setSchool}
         />
-        <TextInput
-          style={styles.textField}
-          placeholder="Escriba el numero de regional"
+        <MinerdAppInput
+          color="blue"
+          placeholder="Número de Regional"
           value={regional}
-          onChangeText={setRegional}
+          setValue={setRegional}
         />
-        <TextInput
-          style={styles.textField}
-          placeholder="Escriba el numero de distrito"
+        <MinerdAppInput
+          color="blue"
+          placeholder="Número de Distrito"
           value={district}
-          onChangeText={setDistrict}
+          setValue={setDistrict}
         />
-        <TextInput
-          style={styles.textField}
-          placeholder="Escriba la fecha"
-          value={date}
-          onChangeText={setDate}
-        />
-        <TextInput
-          style={styles.textField}
-          placeholder="Escriba la descripción"
+        <MinerdAppInput
+          color="blue"
+          placeholder="Descripción"
           value={description}
-          onChangeText={setDescription}
+          setValue={setDescription}
         />
-        <TouchableOpacity style={styles.button} onPress={takePhoto}>
-          <Text style={styles.buttonText}>Tomar Foto</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={isRecording ? stopRecording : startRecording}>
-          <Text style={styles.buttonText}>
-            {isRecording ? 'Detener Grabación' : 'Grabar Audio'}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={handleSave}>
-          <Text style={styles.buttonText}>Guardar</Text>
-        </TouchableOpacity>
-      </View>
+        <MinerdAppDatePicker date={date} setDate={setDate} />
+        <MinerdAppPhotoInput photo={photo} setPhoto={setPhoto} />
+        <MinerdAppAudioRecorder audio={audio} setAudio={setAudio} />
+        <MinerdAppButton title="Guardar" onPress={handleSave} />
+      </ScrollView>
     </View>
   );
 }
@@ -167,8 +97,7 @@ function RegisterIncidentScreen({navigation}: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    padding: 16,
   },
   title: {
     color: '#abc2c2',
