@@ -1,13 +1,9 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  Alert,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, Image, StyleSheet, Alert} from 'react-native';
 import Sound from 'react-native-sound';
+import Spacer from '../../ui/spacer/Spacer';
+import {ScrollView} from 'react-native-gesture-handler';
+import MinerdAppButton from '../../ui/MinerdAppButton';
 
 const IncidentDetailsScreen = ({route}: {route: any}) => {
   const {incidence} = route.params;
@@ -31,22 +27,44 @@ const IncidentDetailsScreen = ({route}: {route: any}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{incidence.title}</Text>
-      <Text>Descripcion: {incidence.description}</Text>
-      <Text>Centro Educativo: {incidence.school}</Text>
-      <Text>Regional: {incidence.regional}</Text>
-      <Text>Distrito: {incidence.district}</Text>
-      <Text>Fecha: {incidence.date}</Text>
-      {incidence.photo && (
-        <Image source={{uri: incidence.photo}} style={styles.image} />
-      )}
-      {incidence.audio && (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => playAudio(incidence.audio)}>
-          <Text style={styles.buttonText}>Reproducir Audio</Text>
-        </TouchableOpacity>
-      )}
+      <Spacer marginBottom={20}>
+        <Text style={styles.title}>{incidence.title}</Text>
+      </Spacer>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Spacer marginBottom={10}>
+          <Text style={styles.textHeader}>Descripcion</Text>
+          <Text style={styles.text}>{incidence.description}</Text>
+        </Spacer>
+        <Spacer marginBottom={10}>
+          <Text style={styles.textHeader}>Centro Educativo</Text>
+          <Text style={styles.text}>{incidence.school}</Text>
+        </Spacer>
+        <Spacer marginBottom={10}>
+          <Text style={styles.textHeader}>Regional</Text>
+          <Text style={styles.text}>{incidence.regional}</Text>
+        </Spacer>
+        <Spacer marginBottom={10}>
+          <Text style={styles.textHeader}>Distrito</Text>
+          <Text style={styles.text}>{incidence.district}</Text>
+        </Spacer>
+        <Spacer marginBottom={10}>
+          <Text style={styles.textHeader}>Fecha</Text>
+          <Text style={styles.text}>{incidence.date}</Text>
+        </Spacer>
+        {incidence.photo && (
+          <Spacer marginVertical={15}>
+            <Image source={{uri: incidence.photo}} style={styles.image} />
+          </Spacer>
+        )}
+        {incidence.audio && (
+          <Spacer marginVertical={10}>
+            <MinerdAppButton
+              title="Reproducir Audio"
+              onPress={() => playAudio(incidence.audio)}
+            />
+          </Spacer>
+        )}
+      </ScrollView>
     </View>
   );
 };
@@ -55,17 +73,28 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    padding: 20,
   },
   title: {
     color: '#000000',
     fontSize: 30,
     fontWeight: 'bold',
-    fontFamily: 'serif',
+  },
+  textHeader: {
+    color: 'black',
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  text: {
+    color: 'black',
+    fontSize: 16,
+    textAlign: 'center',
   },
   image: {
     width: '100%',
-    height: 200,
-    marginVertical: 12,
+    aspectRatio: 1,
+    borderRadius: 20,
   },
   button: {
     alignItems: 'center',
