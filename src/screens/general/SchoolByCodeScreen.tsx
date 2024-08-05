@@ -3,13 +3,14 @@ import {
   View,
   Text,
   TextInput,
-  Button,
   StyleSheet,
   Alert,
   FlatList,
   ActivityIndicator,
 } from 'react-native';
 import Spacer from '../../ui/spacer/Spacer';
+import MinerdAppInput from '../../ui/MinerdAppInput';
+import MinerdAppButton from '../../ui/MinerdAppButton';
 
 const SchoolByCodeScreen = () => {
   const [code, setCode] = useState('');
@@ -80,26 +81,30 @@ const SchoolByCodeScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Ingrese un codigo regional</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Ingrese el código regional"
+      <MinerdAppInput
+        placeholder="Código regional"
         value={code}
-        onChangeText={setCode}
+        setValue={setCode}
+        color="blue"
         keyboardType="numeric"
       />
-      <Spacer marginVertical={10} marginBottom={30}>
-        <Button title="Consultar" onPress={fetchSchoolData} />
-      </Spacer>
-      <Spacer marginBottom={10}>
-        {loading && <ActivityIndicator size={40} color={'dodgerblue'} />}
-      </Spacer>
+
+      <MinerdAppButton title="CONSULTAR" onPress={fetchSchoolData} />
+      {loading && (
+        <Spacer marginBottom={10}>
+          <ActivityIndicator size={40} color={'dodgerblue'} />
+        </Spacer>
+      )}
       {schools.length > 0 && !loading && (
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Buscar por nombre"
-          value={search}
-          onChangeText={setSearch}
-        />
+        <Spacer width="100%" marginVertical={20}>
+          <MinerdAppInput
+            placeholder="Buscar por nombre"
+            value={search}
+            setValue={setSearch}
+            color="blue"
+            keyboardType="numeric"
+          />
+        </Spacer>
       )}
       {!loading && (
         <FlatList
