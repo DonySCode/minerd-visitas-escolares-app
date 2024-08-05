@@ -40,7 +40,7 @@ const WeatherScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.weatherContainer}>
-        <Text style={styles.location}>Weather in {weather.location.name}</Text>
+        <Text style={styles.location}>Clima en {weather.location.name}</Text>
         <Text style={styles.temp}>{weather.current.temp_c} °C</Text>
         {weather.current.condition.icon && (
           <Image
