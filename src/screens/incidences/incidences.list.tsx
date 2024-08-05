@@ -40,6 +40,7 @@ const IncidentListScreen = ({navigation}: Props) => {
         {incidences.map(item => (
           <TouchableOpacity
             style={styles.button}
+            activeOpacity={0.9}
             key={item.id}
             onPress={() =>
               navigation.navigate('IncidenceDetails', {incidence: item})
@@ -54,28 +55,25 @@ const IncidentListScreen = ({navigation}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
+    flex: 1,
+    padding: 20,
   },
   button: {
     alignItems: 'center',
     justifyContent: 'center',
     margin: 5,
-    height: 40,
-    width: 300,
-    shadowColor: '#FFFFFF',
-    shadowOpacity: 1.5,
-    elevation: 8,
-    shadowRadius: 20,
-    backgroundColor: '#008CBA',
+    height: 50,
+    width: '100%',
+    elevation: 2,
+    backgroundColor: 'white',
+    borderRadius: 12,
   },
   buttonText: {
     fontFamily: 'Roboto',
     fontSize: 15,
     textTransform: 'uppercase',
     fontWeight: '900',
-    color: '#FFFFFF',
+    color: 'black',
   },
 });
 
