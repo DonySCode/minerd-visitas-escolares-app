@@ -49,29 +49,29 @@ export default VisitDetailScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#fff',
   },
   item: {
     backgroundColor: 'white',
     padding: 16,
     borderRadius: 8,
-    borderWidth: 1,
     width: '100%',
+    elevation: 2,
   },
   row: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     marginBottom: 8,
   },
   label: {
     fontWeight: 'bold',
-    color: '#333',
+    color: 'black',
     width: 120,
+    fontSize: 16,
   },
   value: {
     color: '#333',
-    flex: 1,
+    fontSize: 18,
   },
 });

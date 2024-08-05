@@ -88,10 +88,6 @@ const MyVisitsScreen = ({navigation}: Props) => {
                   <Text style={styles.label}>Fecha:</Text>
                   <Text style={styles.value}>{item.fecha}</Text>
                 </View>
-                <View style={styles.row}>
-                  <Text style={styles.label}>Hora:</Text>
-                  <Text style={styles.value}>{item.hora}</Text>
-                </View>
               </View>
             </Spacer>
           </TouchableOpacity>
@@ -110,19 +106,22 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 8,
     backgroundColor: 'white',
+    elevation: 2,
   },
   row: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     marginBottom: 8,
   },
   label: {
     fontWeight: 'bold',
     color: '#333',
     width: 120,
+    fontSize: 16,
   },
   value: {
     color: '#333',
-    flex: 1,
+    fontSize: 16,
   },
   text: {
     color: '#000',
