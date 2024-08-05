@@ -3,6 +3,7 @@ export interface Visit {
   cedula_director: string;
   codigo_centro: string;
   motivo: string;
+  comentario: string;
   latitud: string;
   longitud: string;
   fecha: string;
