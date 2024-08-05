@@ -1,14 +1,9 @@
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  TouchableOpacity,
-  Alert,
-} from 'react-native';
+import {StyleSheet, View, Alert} from 'react-native';
 import React, {useState} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {AuthNativeStackParamList} from '../../navigation/AuthNavigator';
+import MinerdAppButton from '../../ui/MinerdAppButton';
+import MinerdAppInput from '../../ui/MinerdAppInput';
 
 type Props = NativeStackScreenProps<AuthNativeStackParamList, 'SignUp'>;
 
@@ -56,56 +51,53 @@ const SignUpScreen = ({navigation}: Props) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Registro de Técnico</Text>
-      <TextInput
-        style={styles.input}
+      <MinerdAppInput
+        color="blue"
         placeholder="Cédula"
         value={cedula}
-        onChangeText={setCedula}
+        setValue={setCedula}
         keyboardType="numeric"
       />
-      <TextInput
-        style={styles.input}
+      <MinerdAppInput
+        color="blue"
         placeholder="Nombre"
         value={nombre}
-        onChangeText={setNombre}
+        setValue={setNombre}
       />
-      <TextInput
-        style={styles.input}
+      <MinerdAppInput
+        color="blue"
         placeholder="Apellido"
         value={apellido}
-        onChangeText={setApellido}
+        setValue={setApellido}
       />
-      <TextInput
-        style={styles.input}
+      <MinerdAppInput
+        color="blue"
         placeholder="Clave"
         value={clave}
-        onChangeText={setClave}
-        secureTextEntry
+        setValue={setClave}
       />
-      <TextInput
-        style={styles.input}
+      <MinerdAppInput
+        color="blue"
         placeholder="Correo"
         value={correo}
-        onChangeText={setCorreo}
+        setValue={setCorreo}
         keyboardType="email-address"
       />
-      <TextInput
-        style={styles.input}
+      <MinerdAppInput
+        color="blue"
         placeholder="Teléfono"
         value={telefono}
-        onChangeText={setTelefono}
+        setValue={setTelefono}
         keyboardType="phone-pad"
       />
-      <TextInput
-        style={styles.input}
-        placeholder="Fecha de Nacimiento (YYYY-MM-DD)"
+      <MinerdAppInput
+        color="blue"
+        placeholder="Fecha de nacimiento"
         value={fechaNacimiento}
-        onChangeText={setFechaNacimiento}
+        setValue={setFechaNacimiento}
       />
-      <TouchableOpacity onPress={handleSignUp} style={styles.signUpButton}>
-        <Text style={styles.signUpButtonText}>Registrar</Text>
-      </TouchableOpacity>
+
+      <MinerdAppButton title="Registrar" onPress={handleSignUp} />
     </View>
   );
 };
@@ -115,14 +107,15 @@ export default SignUpScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
+    backgroundColor: 'white',
   },
   title: {
     fontSize: 24,
     marginBottom: 16,
     color: 'black',
+    fontWeight: 'bold',
   },
   input: {
     width: '100%',

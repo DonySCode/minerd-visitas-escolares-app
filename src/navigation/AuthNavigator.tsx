@@ -30,14 +30,14 @@ const AuthNavigator = () => {
         name="SignUp"
         component={SignUpScreen}
         options={{
-          title: '',
+          title: 'Registro de técnico',
         }}
       />
       <Stack.Screen
         name="ForgotPassword"
         component={ForgotPasswordScreen}
         options={{
-          title: '',
+          title: 'Reiniciar contraseña',
         }}
       />
     </Stack.Navigator>

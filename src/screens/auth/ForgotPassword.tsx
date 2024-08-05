@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, Alert} from 'react-native';
+import {StyleSheet, View, Alert} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {AuthNativeStackParamList} from '../../navigation/AuthNavigator';
 import MinerdAppButton from '../../ui/MinerdAppButton';
@@ -38,8 +38,6 @@ const ForgotPasswordScreen = ({navigation}: Props) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Reiniciar contraseña</Text>
-
       <MinerdAppInput
         color="blue"
         placeholder="Cédula"
@@ -71,6 +69,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginBottom: 16,
     color: 'black',
+    fontWeight: 'bold',
   },
   input: {
     width: '100%',
