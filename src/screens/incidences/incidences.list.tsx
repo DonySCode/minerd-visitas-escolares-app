@@ -40,6 +40,7 @@ const IncidentListScreen = ({navigation}: Props) => {
         {incidences.map(item => (
           <TouchableOpacity
             style={styles.button}
+            key={item.id}
             onPress={() =>
               navigation.navigate('IncidenceDetails', {incidence: item})
             }>
