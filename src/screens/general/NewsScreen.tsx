@@ -48,6 +48,7 @@ const NewsScreen = () => {
         <ActivityIndicator size="large" color="#0000ff" />
       ) : (
         <FlatList
+          showsVerticalScrollIndicator={false}
           data={news}
           renderItem={renderNewsItem}
           keyExtractor={item => item.link}
