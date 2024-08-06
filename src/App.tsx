@@ -1,21 +1,28 @@
-import React from 'react';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {NavigationContainer} from '@react-navigation/native';
-import HomeScreen from './screens/HomeScreen';
-
-export type RootStackParamList = {
-  Home: undefined;
-};
-
-const Drawer = createDrawerNavigator<RootStackParamList>();
+import React, {useEffect} from 'react';
+import {Provider} from 'react-redux';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import AppNavigator from './navigation/AppNavigator';
+import {store} from './store/store';
+import {requestPermissions} from './services/permissions';
 
 function App(): React.JSX.Element {
+  useEffect(() => {
+    const getPermissions = async () => {
+      const granted = await requestPermissions();
+      if (!granted) {
+        console.warn('Permissions not granted');
+      }
+    };
+
+    getPermissions();
+  }, []);
+
   return (
-    <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={HomeScreen} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <SafeAreaProvider>
+        <AppNavigator />
+      </SafeAreaProvider>
+    </Provider>
   );
 }
 

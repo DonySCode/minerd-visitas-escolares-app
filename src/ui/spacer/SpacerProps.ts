@@ -8,4 +8,5 @@ export type SpacerProps = PropsWithChildren<{
   marginBottom?: number;
   marginLeft?: number;
   marginRight?: number;
+  width?: DimensionValue | undefined;
 }>;
